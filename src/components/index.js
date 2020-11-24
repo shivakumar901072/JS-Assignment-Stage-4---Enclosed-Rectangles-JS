@@ -73,11 +73,12 @@ function relative(rec1,rec2) {
  const W = 100000; //total width
 
  function normalize(rec) {
-	 return
+	 return {
 	 x1:rec.top ? parseInt(rec.top):(T - (parseInt(rec.bottom) + parseInt(rec.height)));
 	 y1:rec.left ? parseInt(rec.left): (W - (parseInt(rec.right) + parseInt(rec.width)))
 	 x2:rec.bottom ? (T -parseInt(rec.bottom)): (parseInt(rec.top) + parseInt(rec.height));
 	 y2:rec.right? (W-parseInt(rec.right)): (parseInt(rec.left) + parseInt(rec.width));
- }
+   }
+}
 
 module.exports = updateStructure;
