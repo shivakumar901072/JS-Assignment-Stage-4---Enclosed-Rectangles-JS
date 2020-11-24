@@ -5,62 +5,62 @@
 //	height: '96px'
 //}
 
-function updateStructure(rec1,rec2){
+function updateStructure(recA,recB){
 	//contains(1,2) returns true/false if 2 is contained in 1.
 	//relative(1,2) returns relative dimensions of 2 (w r t) to 1 
-	if(contains(rec1,rec2)) {
-		const relativeDim=relative(rec1,rec2);
-		return {...rec1,children:[relativeDim]};
+	if(contains(recA,recB)) {
+		const relativeDim=relative(recA,recB);
+		return {...recA,children:[relativeDim]};
 	}
-	else if (contains(rec2,rec1)) {
-		const relativeDim = relative(rec2,rec1);
-		return {...rec2,children:[relativeDim]};
+	else if (contains(recB,recA)) {
+		const relativeDim = relative(recB,recA);
+		return {...recB,children:[relativeDim]};
 	}
 	else {
-		return{...rec1};
+		return{...recA};
 	}
 }
 
-function relative(rec1,rec2) {
-	const rec1n = normalize(rec1);
-	const rec2n = normalize(rec2);
+function relative(recB,recA) {
+	const recAn = normalize(recA);
+	const recBn = normalize(recB);
 
 	const res = {
-		children: rec2.children
+		children: recB.children
 	}
 	
-	if(rec2.top) {
-		res.top = `$(rec2n.x1 - rec1n.x1)px`;
+	if(recB.top) {
+		res.top = `$(recBn.x1 - recAn.x1)px`;
 	}
-	if(rec2.left) {
-		res.left = `$(rec2n.y1-rec1n.y1)px`;
+	if(recB.left) {
+		res.left = `$(recBn.y1 - recAn.y1)px`;
 	}
-	if(rec2.height) {
-		res.height = rec2.height;
+	if(recB.height) {
+		res.height = recB.height;
 	}
 	if(rec2.width) {
 		res.width = rec2.width;
 	}
-	if(rec2.bottom) {
-		res.bottom = `$(rec1n.x2 - rec2n.x2)px`;
+	if(recB.bottom) {
+		res.bottom = `$(recAn.x2 - recBn.x2)px`;
 	}
-	if(rec2.right) {
-		rec.right = `$(rec1n.y2 - rec2n.y2)px`;
+	if(recB.right) {
+		rec.right = `$(recAn.y2 - recBn.y2)px`;
 	}
 	return res;
 }
 
 
- // is rec2 inside rec1
- function contains(rec1,rec2) {
-	 const rec1n = normalize(rec1);
-	 const rec2n = normalize(rec2);
+ // is recB inside recA
+ function contains(recB,recA) {
+	 const recBn = normalize(recA);
+	 const recAn = normalize(recB);
 
 	 if(
-		 rec1n.x1 <= rec2n.x1
-		&& rec1n.y1 <= rec2n.y1
-		&& rec1n.x2 >= rec2n.x2
-		&& rec1n.y2 >= rec2n.y2
+		 recAn.x1 <= recBn.x1
+		&& recAn.y1 <= recBn.y1
+		&& recAn.x2 >= recBn.x2
+		&& recAn.y2 >= recBn.y2
 	 ) {
 		 return true;
 	 }
